@@ -4,16 +4,18 @@ pipeline {
         stage('Build') { 
             steps {
                 // 
+                echo "Building application ... "
             }
         }
         stage('Test') { 
             steps {
                 // 
+                echo "Testing application ... "
             }
         }
         stage('Deploy') { 
             steps {
-                echo ""
+                echo "Deploying application ... "
                 withCredentials([ // Plugin Credentials and Credentials Bindings
                     usernamePassword(credentials: 'credential_name', usernameVariable: USER, passwordVariable: PWD)
                 ]) {
