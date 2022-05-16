@@ -1,37 +1,44 @@
+def gv
+
 pipeline {
-    agent any 
-//     tools{
-//         // gradel, maven and jdk
-//         maven Maven
-//     }
+    agent any
     parameters {
-        string(name: 'VERSION', defaultValue: '', description: 'version to deploy in prod')
-        choice(name: 'VERSION', choices: ['1.0','1.1','1.2'], description: '')
-        booleanParam(name: 'executeTest', defaultValue: true, description: '')
+        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+        booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
     stages {
-        stage('Build') { 
+        stage("init") {
             steps {
-                // 
-                echo "Building application ... "
+                script {
+                   gv = load "script.groovy" 
+                }
             }
         }
-        stage('Test') { 
+        stage("build") {
             steps {
-                // 
-                echo "Testing application ... "
+                script {
+                    gv.buildApp()
+                }
             }
         }
-        stage('Deploy') { 
+        stage("test") {
+            when {
+                expression {
+                    params.executeTests
+                }
+            }
             steps {
-                echo "Deploying application ... "
-//                 withCredentials([ // Plugin Credentials and Credentials Bindings
-//                     usernamePassword(credentials: 'login', usernameVariable: USER, passwordVariable: PWD)
-//                 ]) {
-//                     // sh "/path/scripts/some_script.sh ${USER} ${PWD} "
-//                     echo  "/path/scripts/some_script.sh ${USER} ${PWD} "
-//                 }
+                script {
+                    gv.testApp()
+                }
             }
         }
-    }
+        stage("deploy") {
+            steps {
+                script {
+                    gv.deployApp()
+                }
+            }
+        }
+    }   
 }
