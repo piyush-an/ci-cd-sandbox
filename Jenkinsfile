@@ -1,9 +1,9 @@
 pipeline {
     agent any 
-    tools{
-        // gradel, maven and jdk
-        maven Maven
-    }
+//     tools{
+//         // gradel, maven and jdk
+//         maven Maven
+//     }
     parameters {
         string(name: 'VERSION', defaultValue: '', description: 'version to deploy in prod')
         choice(name: 'VERSION', choices: ['1.0','1.1','1.2'], description: '')
