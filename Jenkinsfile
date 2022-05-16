@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo "Deploying application ... "
                 withCredentials([ // Plugin Credentials and Credentials Bindings
-                    usernamePassword(credentials: 'credential_name', usernameVariable: USER, passwordVariable: PWD)
+                    usernamePassword(credentials: 'login', usernameVariable: USER, passwordVariable: PWD)
                 ]) {
                     // sh "/path/scripts/some_script.sh ${USER} ${PWD} "
                     echo  "/path/scripts/some_script.sh ${USER} ${PWD} "
