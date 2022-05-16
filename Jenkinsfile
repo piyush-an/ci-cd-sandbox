@@ -16,12 +16,12 @@ pipeline {
         stage('Deploy') { 
             steps {
                 echo "Deploying application ... "
-                withCredentials([ // Plugin Credentials and Credentials Bindings
-                    usernamePassword(credentials: 'login', usernameVariable: USER, passwordVariable: PWD)
-                ]) {
-                    // sh "/path/scripts/some_script.sh ${USER} ${PWD} "
-                    echo  "/path/scripts/some_script.sh ${USER} ${PWD} "
-                }
+//                 withCredentials([ // Plugin Credentials and Credentials Bindings
+//                     usernamePassword(credentials: 'login', usernameVariable: USER, passwordVariable: PWD)
+//                 ]) {
+//                     // sh "/path/scripts/some_script.sh ${USER} ${PWD} "
+//                     echo  "/path/scripts/some_script.sh ${USER} ${PWD} "
+//                 }
             }
         }
     }
